@@ -6,7 +6,6 @@ import net.dzirt.MainFrame;
 public class Main {
     public static void main(String[] args) {
         MainFrame frame1 = new MainFrame();
-        //frame1.init();
-
+        frame1.init(4);
     }
 }
