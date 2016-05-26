@@ -69,8 +69,8 @@ public class FPanel extends JPanel {
     public void checkField(){
         int count=1;
         int error=0;
-        for(int i = 0;i<4;i++)
-            for(int j = 0;j<4;j++)
+        for(int i = 0;i<N;i++)
+            for(int j = 0;j<N;j++)
             {
                 if(numberMatrix[i][j]!=count)error++;
                 count++;
@@ -101,8 +101,9 @@ public class FPanel extends JPanel {
         System.out.println("Matrix after randomize");
         printNumMatr();
 
-
     }
+
+
 
 
     public void printNumMatr(){
