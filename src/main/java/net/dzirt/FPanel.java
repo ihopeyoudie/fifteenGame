@@ -66,6 +66,24 @@ public class FPanel extends JPanel {
         }
         System.out.println("  void: " + voidButton.getX() + ":" + voidButton.getY());
     }
+    public void checkField(){
+        int count=1;
+        int error=0;
+        for(int i = 0;i<4;i++)
+            for(int j = 0;j<4;j++)
+            {
+                if(numberMatrix[i][j]!=count)error++;
+                count++;
+            }
+        if(error==1)
+        {
+            System.out.println("WIN!!!");
+            int result = JOptionPane.showConfirmDialog(null,
+                    "You win!!!","You win!!! New game?",JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.YES_OPTION) buildField();
+
+        }
+    }
 
     public void randomizeMatrix()
     {
@@ -85,6 +103,8 @@ public class FPanel extends JPanel {
 
 
     }
+
+
     public void printNumMatr(){
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
@@ -140,6 +160,7 @@ public class FPanel extends JPanel {
 
             }
             refreshField();
+            checkField();
         }
     }
 }
