@@ -1,12 +1,11 @@
-import net.dzirt.MainFrame;
+import net.dzirt.MFrame;
 
 /**
  * Created by Dzirt on 25.05.2016.
  */
 public class Main {
     public static void main(String[] args) {
-        MainFrame frame1 = new MainFrame();
-        //frame1.init();
-
+        MFrame mFrame = new MFrame();
+        mFrame.init(5);
     }
 }
