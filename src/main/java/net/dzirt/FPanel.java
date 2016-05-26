@@ -12,7 +12,7 @@ public class FPanel extends JPanel {
 
     private JButton[][] buttonsMatrix;
     private int[][] numberMatrix;
-
+    private VoidButton voidButton = new VoidButton();
     private int N;
 
     public void init(int N) {
@@ -23,8 +23,7 @@ public class FPanel extends JPanel {
         int k = 0;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-               //buttonList.add(new JButton());
-                buttonsMatrix[i][j] = new JButton("" + k);
+                buttonsMatrix[i][j] = new JButton();
                 buttonsMatrix[i][j].setSize(50,50);
                 buttonsMatrix[i][j].setLocation(50*j,50*i);
                 buttonsMatrix[i][j].setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -40,7 +39,56 @@ public class FPanel extends JPanel {
                add(buttonsMatrix[i][j]);
             }
         }
-        System.out.println("Button field created");
+        //System.out.println("Button field created");
+        randomizeMatrix();
+        refreshField();
+        System.out.println("x-" + voidButton.getX() + " y-" + voidButton.getY());
+//        for (int i = 0; i < N; i++) {
+//            for (int j = 0; j < N; j++) {
+//                buttonsMatrix[i][j].setText(""+numberMatrix[i][j]);
+//                if (numberMatrix[i][j] == 0){buttonsMatrix[i][j].setText("");}
+//            }
+//        }
+
+    }
+    public void refreshField(){
+         for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                buttonsMatrix[i][j].setText(""+numberMatrix[i][j]);
+                if (numberMatrix[i][j] == 0){
+                    buttonsMatrix[i][j].setText("");
+                    voidButton.setX(j);
+                    voidButton.setY(i);
+                }
+            }
+        }
+    }
+
+    public void randomizeMatrix()
+    {
+        for(int i = 0;i<100;i++)
+        {
+            int a = (int)(Math.random()*N);
+            int b = (int)(Math.random()*N);
+            int a2 = (int)(Math.random()*N);
+            int b2 = (int)(Math.random()*N);
+
+            int c = numberMatrix[a][b];
+            numberMatrix[a][b] = numberMatrix[a2][b2];
+            numberMatrix[a2][b2] = c;
+        }
+        System.out.println("Matrix after randomize");
+        printNumMatr();
+
+
+    }
+    public void printNumMatr(){
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                System.out.print(numberMatrix[i][j]+ " ");
+            }
+            System.out.println("");
+        }
     }
 
 
