@@ -2,6 +2,8 @@ package net.dzirt;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
@@ -26,6 +28,7 @@ public class FPanel extends JPanel {
                 buttonsMatrix[i][j] = new JButton();
                 buttonsMatrix[i][j].setSize(50,50);
                 buttonsMatrix[i][j].setLocation(50*j,50*i);
+                buttonsMatrix[i][j].addActionListener(new ButtonActionListener(k));
                 buttonsMatrix[i][j].setCursor(new Cursor(Cursor.HAND_CURSOR));
                 numberMatrix[i][j] = k;
                 k++;
@@ -42,7 +45,6 @@ public class FPanel extends JPanel {
         //System.out.println("Button field created");
         randomizeMatrix();
         refreshField();
-        System.out.println("x-" + voidButton.getX() + " y-" + voidButton.getY());
 //        for (int i = 0; i < N; i++) {
 //            for (int j = 0; j < N; j++) {
 //                buttonsMatrix[i][j].setText(""+numberMatrix[i][j]);
@@ -62,6 +64,7 @@ public class FPanel extends JPanel {
                 }
             }
         }
+        System.out.println("  void: " + voidButton.getX() + ":" + voidButton.getY());
     }
 
     public void randomizeMatrix()
@@ -91,5 +94,52 @@ public class FPanel extends JPanel {
         }
     }
 
+    public class ButtonActionListener implements ActionListener{
+        int k;
+        ButtonActionListener(int k){
+            this.k = k;
+        }
+        public void actionPerformed(ActionEvent e) {
+            int y = k/N;
+            int x = k%N;
+            System.out.print("click on: " + x+":"+y);
+            //click on right
+            if ((voidButton.getX() == x-1)&&(voidButton.getY() == y)){
+                buttonsMatrix[y][x-1].setText(""+numberMatrix[y][x]);
+                numberMatrix[y][x-1] = numberMatrix[y][x];
 
+                buttonsMatrix[y][x].setText("");
+                numberMatrix[y][x] = 0;
+
+            }
+            //click on left
+            if ((voidButton.getX() == x+1)&&(voidButton.getY() == y)){
+                buttonsMatrix[y][x+1].setText(""+numberMatrix[y][x]);
+                numberMatrix[y][x+1] = numberMatrix[y][x];
+
+                buttonsMatrix[y][x].setText("");
+                numberMatrix[y][x] = 0;
+
+            }
+            //click on up
+            if ((voidButton.getX() == x)&&(voidButton.getY() == y-1)){
+                buttonsMatrix[y-1][x].setText(""+numberMatrix[y][x]);
+                numberMatrix[y-1][x] = numberMatrix[y][x];
+
+                buttonsMatrix[y][x].setText("");
+                numberMatrix[y][x] = 0;
+
+            }
+            //click on down
+            if ((voidButton.getX() == x)&&(voidButton.getY() == y+1)){
+                buttonsMatrix[y+1][x].setText(""+numberMatrix[y][x]);
+                numberMatrix[y+1][x] = numberMatrix[y][x];
+
+                buttonsMatrix[y][x].setText("");
+                numberMatrix[y][x] = 0;
+
+            }
+            refreshField();
+        }
+    }
 }
