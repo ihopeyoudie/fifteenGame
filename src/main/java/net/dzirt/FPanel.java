@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+
 
 /**
  * Created by Dzirt on 25.05.2016.
@@ -100,11 +100,7 @@ public class FPanel extends JPanel {
         }
         System.out.println("Matrix after randomize");
         printNumMatr();
-
     }
-
-
-
 
     public void printNumMatr(){
         for (int i = 0; i < N; i++) {
